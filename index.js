@@ -8,12 +8,8 @@ process('patterns.txt')
 
 async function process(fileName) {
   const content = await fs.readFile(fileName)
-  const allRows = content.toString().split('\n').map(stringToNumericArray)
+  const allRows = content.toString().split('\n').map(value => value.replace(/\./g, ' '))
   return allRows.map(detectType)
-}
-
-function stringToNumericArray(line) {
-  return line.split('').map(c => c === '#' ? 1 : 0)
 }
 
 function detectType(firstRow) {
@@ -38,38 +34,33 @@ function compareRows(newRow, rows) {
 }
 
 function compare(row, earlierRow) {
-  if (row.reduce((acc, value) => acc += value, 0) === 0) {
+  if (row.trim().length === 0) {
     return 'vanishing'
   }
-  if (row.find((value, index) => value !== earlierRow[index]) === undefined) {
+  if (row === earlierRow) {
     return 'blinking'
+  }
+  if (row.trim() === earlierRow.trim()) {
+    return 'gliding'
   }
 }
 
 function produceNextRow(lastRow) {
-  const row = new Array(lastRow.length).fill(0)
+  const row = []
   for (let index = 0; index < lastRow.length; index += 1) {
-    row[index] = cell(index, lastRow) ? 1 : 0
+    row.push(cell(index, lastRow) ? '#' : ' ')
   }
-  return row
+  return row.join('')
 }
 
 function cell(index, lastRow) {
-  const filledCount = safeIndex(lastRow, index - 2) + safeIndex(lastRow, index - 1) + safeIndex(lastRow, index + 1) + safeIndex(lastRow, index + 2)
-  if (lastRow[index]) {
+  const filledCount = countHash(lastRow, index - 2) + countHash(lastRow, index - 1) + countHash(lastRow, index + 1) + countHash(lastRow, index + 2)
+  if (lastRow[index] === '#') {
     return filledCount === 2 || filledCount === 4
   }
   return filledCount === 2 || filledCount === 3
 }
 
-function safeIndex(array, index) {
-  try {
-    return array[index]
-  } finally {
-    return 0
-  }
-}
-
-function visualize(rows) {
-  return rows.map(row => row.map(n => n ? '#' : '.').join('')).join('\n')
+function countHash(row, index) {
+  return row[index] === '#' ? 1 : 0
 }
