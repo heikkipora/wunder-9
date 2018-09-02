@@ -1,0 +1,15 @@
+{
+  "name": "wunder-9",
+  "version": "1.0.0",
+  "description": "Wunderpähkinä vol. 9 - a solution",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Heikki Pora <heikki.pora@gmail.com",
+  "license": "MIT",
+  "dependencies": {},
+  "engines": {
+    "node": "10.9.0",
+    "npm": "6.4.0"
+  }
+}
