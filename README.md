@@ -10,25 +10,25 @@
 ## Results
 
 ```
-blinking
-blinking
-blinking
-blinking
-blinking
-vanishing
-blinking
-blinking
-blinking
-blinking
 gliding
 blinking
 blinking
+blinking
+blinking
+vanishing
+blinking
+blinking
+other
 gliding
 blinking
 blinking
+blinking
+vanishing
+gliding
+gliding
 vanishing
 vanishing
 blinking
-blinking
-blinking
+vanishing
+gliding
 ```

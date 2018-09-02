@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Wunderpähkinä vol. 9 - a solution",
   "scripts": {
-    "start": "node index.js"
+    "start": "node --no-warnings index.js"
   },
   "author": "Heikki Pora <heikki.pora@gmail.com",
   "license": "MIT",
